@@ -3,6 +3,9 @@ const mongoose =require('mongoose');
 const Publicacion = require('../models/post');
 const Comentarios = require('../models/comment');
 
+let now = new Date();
+console.log(now);
+
 
 mongoose.connect('mongodb+srv://lyons:123@cluster0.jgdnxk5.mongodb.net/?retryWrites=true&w=majority')
   .then(() => {
@@ -46,10 +49,11 @@ app.use((req, res, next) => {
   //crear una publicacion
 
   app.post('/api/publicaciones', (req, res, next) => {
+
     const publicacion = new Publicacion({
       title: req.body.title,
       description: req.body.description,
-      time: req.body.time,
+      time: now,
       userId: req.body.userId,
     });
     publicacion.save().then(
